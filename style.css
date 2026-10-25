@@ -1,0 +1,233 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  line-height: 1.6;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.site-header {
+  max-width: 680px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.site-header h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.step-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background-color: #e0e7ff;
+  color: #3730a3;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.step-badge.badge-new {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.card h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.guide-text {
+  font-size: 0.92rem;
+  color: #4b5563;
+  margin-bottom: 1.2rem;
+}
+
+.context-banner {
+  background-color: #f8fafc;
+  border-left: 4px solid #3b82f6;
+  padding: 0.75rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  border-radius: 4px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+.form-group select,
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  outline: 2px solid #2563eb;
+  border-color: transparent;
+}
+
+.feedback-msg {
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.feedback-msg.is-error {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+button {
+  flex: 1 1 auto;
+  min-width: 140px;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.btn-accent {
+  background-color: #059669;
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background-color: #6b7280;
+  color: #ffffff;
+}
+
+.btn-outline {
+  background-color: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.result-box {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 10px;
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+}
+
+.result-box.status-success {
+  background-color: #f0fdf4;
+  border-color: #86efac;
+}
+
+.result-box.status-warning {
+  background-color: #fffbeb;
+  border-color: #fde68a;
+}
+
+.result-box.status-canceled {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.result-box h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.checklist {
+  margin: 0.85rem 0 0.5rem 1.2rem;
+  font-size: 0.94rem;
+}
+
+.checklist li {
+  margin-bottom: 0.35rem;
+}
+
+.next-actions {
+  margin-top: 1.2rem;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+/* 모바일 화면 반응형 처리 */
+@media (max-width: 520px) {
+  body {
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  .card {
+    padding: 1.15rem;
+  }
+
+  .btn-group button {
+    width: 100%;
+  }
+}
