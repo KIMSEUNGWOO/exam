@@ -1,4 +1,3 @@
-// 소모품 기준 데이터
 const PART_DATA = {
   oil: {
     name: '엔진오일 세트',
@@ -47,7 +46,6 @@ const PART_DATA = {
   }
 };
 
-// 전체 애플리케이션 상태 저장
 const state = {
   selectedPartKey: '',
   mileage: '',
@@ -56,7 +54,6 @@ const state = {
   budget: ''
 };
 
-// 1단계 요소 참조
 const partSelect = document.getElementById('part-select');
 const mileageInput = document.getElementById('mileage-input');
 const step1Error = document.getElementById('step1-error');
@@ -64,7 +61,6 @@ const step1Result = document.getElementById('step1-result');
 const step1ResultTitle = document.getElementById('step1-result-title');
 const step1ResultDesc = document.getElementById('step1-result-desc');
 
-// 2단계 요소 참조
 const step2Section = document.getElementById('step2-section');
 const step2Context = document.getElementById('step2-context');
 const methodSelect = document.getElementById('method-select');
@@ -75,13 +71,11 @@ const step2ResultTitle = document.getElementById('step2-result-title');
 const step2ResultDesc = document.getElementById('step2-result-desc');
 const step2Checklist = document.getElementById('step2-checklist');
 
-// [1단계] 점검 결과 확인하기 버튼
 document.getElementById('btn-check-step1').addEventListener('click', () => {
   const partKey = partSelect.value;
   const rawMileage = mileageInput.value.trim();
   const numMileage = Number(rawMileage);
 
-  // 1단계 입력값 검증
   if (!partKey) {
     showError(step1Error, '점검할 소모품 종류를 먼저 선택해 주세요.');
     step1Result.classList.add('is-hidden');
@@ -102,7 +96,6 @@ document.getElementById('btn-check-step1').addEventListener('click', () => {
   state.selectedPartKey = partKey;
   state.mileage = numMileage;
 
-  // 권장 주기 비교
   if (numMileage >= part.limitKm) {
     state.urgencyText = '즉시 교체 권장';
     step1ResultTitle.textContent = `[점검 결과] ${part.name} - 즉시 교체가 필요합니다!`;
@@ -117,7 +110,6 @@ document.getElementById('btn-check-step1').addEventListener('click', () => {
   step1Result.classList.remove('is-hidden');
 });
 
-// [1단계] 입력 지우기 버튼
 document.getElementById('btn-reset-step1').addEventListener('click', () => {
   partSelect.value = '';
   mileageInput.value = '';
@@ -126,7 +118,6 @@ document.getElementById('btn-reset-step1').addEventListener('click', () => {
   step2Section.classList.add('is-hidden');
 });
 
-// [1단계 -> 2단계 연결] 2단계 시뮬레이션 화면 열기
 document.getElementById('btn-go-step2').addEventListener('click', () => {
   const part = PART_DATA[state.selectedPartKey];
   step2Context.textContent = `1단계 선택 항목: ${part.name} (주행거리 ${state.mileage.toLocaleString()}km / 상태: ${state.urgencyText} / 기본 부품비: ${part.partCost.toLocaleString()}원)`;
@@ -134,13 +125,11 @@ document.getElementById('btn-go-step2').addEventListener('click', () => {
   step2Section.scrollIntoView({ behavior: 'smooth' });
 });
 
-// [2단계 새 기능] 예산 조건 확인 및 계획 생성 버튼
 document.getElementById('btn-run-sim').addEventListener('click', () => {
   const method = methodSelect.value;
   const rawBudget = budgetInput.value.trim();
   const numBudget = Number(rawBudget);
 
-  // [오류 분기] 값이 비었거나 범위(10,000 ~ 500,000)를 벗어난 경우
   if (rawBudget === '' || isNaN(numBudget) || numBudget < 10000 || numBudget > 500000) {
     showError(
       step2Error,
@@ -162,7 +151,6 @@ document.getElementById('btn-run-sim').addEventListener('click', () => {
 
   step2Result.className = 'result-box';
 
-  // [조건 미달 / 결과 없음 분기] 가용 예산이 총 예상 비용보다 부족할 때
   if (numBudget < totalCost) {
     const shortage = totalCost - numBudget;
     step2Result.classList.add('status-warning');
@@ -171,7 +159,6 @@ document.getElementById('btn-run-sim').addEventListener('click', () => {
     step2Checklist.classList.add('is-hidden');
     step2Checklist.innerHTML = '';
   } else {
-    // [정상 성공 분기] 예산이 충분할 때 맞춤형 체크리스트 생성
     const remainBudget = numBudget - totalCost;
     const tasks = method === 'shop' ? part.shopTasks : part.diyTasks;
 
@@ -191,7 +178,6 @@ document.getElementById('btn-run-sim').addEventListener('click', () => {
   step2Result.classList.remove('is-hidden');
 });
 
-// [2단계 취소 분기] 예산 계산 취소하기 버튼
 document.getElementById('btn-cancel-sim').addEventListener('click', () => {
   hideError(step2Error);
   step2Result.className = 'result-box status-canceled';
@@ -202,7 +188,6 @@ document.getElementById('btn-cancel-sim').addEventListener('click', () => {
   step2Result.classList.remove('is-hidden');
 });
 
-// [다음 행동 1] 2단계 예산·방식 다시 수정 (기존 입력값 유지)
 document.getElementById('btn-edit-step2').addEventListener('click', () => {
   step2Result.classList.add('is-hidden');
   methodSelect.value = state.method;
@@ -210,14 +195,12 @@ document.getElementById('btn-edit-step2').addEventListener('click', () => {
   budgetInput.focus();
 });
 
-// [다음 행동 2] 1단계로 돌아가기 (기존 1·2단계 입력값 모두 유지)
 document.getElementById('btn-back-step1').addEventListener('click', () => {
   step2Result.classList.add('is-hidden');
   document.getElementById('step1-section').scrollIntoView({ behavior: 'smooth' });
   partSelect.focus();
 });
 
-// [다음 행동 3] 처음부터 다시 시작 (모든 상태 및 입력값 초기화)
 document.getElementById('btn-reset-all').addEventListener('click', () => {
   state.selectedPartKey = '';
   state.mileage = '';
