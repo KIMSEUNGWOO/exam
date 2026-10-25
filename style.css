@@ -217,7 +217,6 @@ button:hover {
   display: none !important;
 }
 
-/* 모바일 화면 반응형 처리 */
 @media (max-width: 520px) {
   body {
     padding: 1rem 0.75rem 2rem;
